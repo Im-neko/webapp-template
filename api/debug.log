@@ -1,0 +1,4 @@
+{"level":"debug","message":"Logging initialized at debug level","timestamp":"2019-07-13T07:46:26.723Z"}
+{"level":"debug","message":"Using .env.example file to supply config environment variables","timestamp":"2019-07-13T07:46:26.725Z"}
+{"level":"debug","message":"Logging initialized at debug level","timestamp":"2019-07-13T07:46:31.377Z"}
+{"level":"debug","message":"Using .env.example file to supply config environment variables","timestamp":"2019-07-13T07:46:31.378Z"}

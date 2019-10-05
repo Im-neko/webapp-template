@@ -1,0 +1,43 @@
+version: '3'
+services:
+  front:
+    build:
+      args:
+        APP_ENV: "$ENV"
+      context: .
+      dockerfile: front/Dockerfile
+    container_name: front
+    links:
+      - api
+    ports:
+      - "$FRONT_PORT:3000"
+    restart: always
+
+  api:
+    build:
+      args:
+        APP_ENV: "$ENV"
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: api
+    links:
+      - mysql
+    ports:
+      - "$API_PORT:3000"
+    restart: always
+
+  mysql:
+    build:
+      context: .
+      dockerfile: mysql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user                 #作業ユーザ名
+      MYSQL_PASSWORD: $MYSQL_PASS   #作業ユーザ用のパスワード
+      MYSQL_DATABASE: app    #作成するDB名
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3008:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+    restart: always
