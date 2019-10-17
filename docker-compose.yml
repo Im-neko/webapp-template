@@ -6,7 +6,6 @@ services:
         APP_ENV: "$ENV"
       context: .
       dockerfile: front/Dockerfile
-    container_name: front
     links:
       - api
     ports:
@@ -19,7 +18,6 @@ services:
         APP_ENV: "$ENV"
       context: .
       dockerfile: api/Dockerfile
-    container_name: api
     links:
       - mysql
     ports:
