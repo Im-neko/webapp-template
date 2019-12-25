@@ -2,7 +2,7 @@ import App, { Container } from "next/app";
 import React from "react";
 import { Provider } from "mobx-react";
 import withMobxStore from "../lib/with-mobx-store";
-import { storesType } from "../stores";
+import { StoreType } from "../stores";
 
 
 interface IProps {
