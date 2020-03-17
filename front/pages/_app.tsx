@@ -1,8 +1,8 @@
-import App, { Container } from "next/app";
+import App from "next/app";
 import React from "react";
 import { Provider } from "mobx-react";
 import withMobxStore from "../lib/with-mobx-store";
-import { StoreType } from "../stores";
+import { storesType } from "../stores";
 
 
 interface IProps {
@@ -20,11 +20,9 @@ class MyApp extends App<IProps> {
   render () {
     const {Component, pageProps, mobxStore} = this.props;
     return (
-      <Container>
-        <Provider {...mobxStore}>
-          <Component {...pageProps} />
-        </Provider>
-      </Container>
+      <Provider {...mobxStore}>
+        <Component {...pageProps} />
+      </Provider>
     );
   }
 }

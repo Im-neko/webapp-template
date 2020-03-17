@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import * as fs from "fs";
 
-import { pubKey, privKey } from "./env";
 
+const pubKey = __dirname + '/../' + process.env.PUB_KEY;
+const privKey = __dirname + '/../' + process.env.PRIV_KEY;
+console.log(pubKey, privKey);
 
-const decodeJWT = (req: Request, res: Response, next: Function) => {
+export const decodeJWT = (req: Request, res: Response, next: Function) => {
   const token = req.body.token || req.query.token || req.headers["x-access-token"];
   if ( !token ) {
     next();
@@ -25,7 +27,7 @@ const decodeJWT = (req: Request, res: Response, next: Function) => {
   });
 };
 
-const checkJWT = (req: Request, res: Response, next: Function) => {
+export const checkJWT = (req: Request, res: Response, next: Function) => {
   const token = req.body.token || req.query.token || req.headers["x-access-token"];
   if ( !token ) {
     return res.status(403).send( { error: "No token provided." } );
@@ -44,7 +46,7 @@ const checkJWT = (req: Request, res: Response, next: Function) => {
   });
 };
 
-const signJWT = (obj: object) => {
+export const signJWT = (obj: object) => {
   return jwt.sign(
     obj,
     fs.readFileSync( privKey ),
@@ -52,8 +54,4 @@ const signJWT = (obj: object) => {
   );
 };
 
-const pubkey = () => fs.readFileSync( pubKey );
-
-
-export { decodeJWT, checkJWT, signJWT, pubkey };
-
+export const pubkey = () => fs.readFileSync( pubKey );

@@ -1,17 +1,18 @@
-import React from "react";
+import { Component } from "react";
 import styled from "styled-components";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 
-class IndexPage extends React.Component {
-
+class IndexPage extends Component {
   render() {
     return (
       <Wrapper> 
         <Header />
         Index page.
+        <br />
+        ENV: {process.env.ENV}
         <Footer />
       </Wrapper>
     ); 

@@ -1,14 +1,13 @@
 import errorHandler from "errorhandler";
 import { getConnectionOptions, createConnection, BaseEntity } from "typeorm";
+import dotenv from "dotenv";
+dotenv.config();
 
 import app from "./app";
 
 
-const server = async () => {
-  const connectionOptions = await getConnectionOptions();
-  const connection = await createConnection(connectionOptions);
-  BaseEntity.useConnection(connection);
 
+const server = async () => {
   /**
    * Error Handler. Provides full stack - remove for production
    */

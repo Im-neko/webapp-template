@@ -1,0 +1,39 @@
+name: build-and-deploy-stg
+
+on:
+  push:
+    branches:
+      - stg
+
+jobs:
+
+  build:
+    name: test build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+            ref: stg
+      - run: cp .env.example .env
+      - name: build
+        run: docker-compose build --no-cache && docker-compose up -d 
+
+  deploy:
+    name: deploy to stg
+    runs-on: ubuntu-latest
+    needs: build
+    steps: 
+      - name: ssh and deploy
+        uses: im-neko/ssh-action@master
+        with:
+          host: ${{ secrets.STG_HOST }}
+          username: ${{ secrets.STG_USER }}
+          key: ${{ secrets.STG_KEY }}
+          port: ${{ secrets.STG_PORT }}
+          script: |
+            cd /var/webapp-template &&
+            sudo git pull origin stg &&
+            sudo docker system prune -f &&
+            docker-compose build --no-cache &&
+            docker-compose up -d 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { initializeStore } from '../stores';
 
 const isServer = typeof window === 'undefined'
@@ -18,7 +18,7 @@ function getOrCreateStore(initialState) {
 }
 
 export default (App) => {
-  return class AppWithMobx extends React.Component {
+  return class AppWithMobx extends Component {
     static async getInitialProps (appContext) {
       // Get or Create the store with `undefined` as initialState
       // This allows you to set a custom default initialState

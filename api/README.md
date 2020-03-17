@@ -1,2 +1,2 @@
 # README
-Typescript + Express + typeORM
+Typescript + Express + MySQL
